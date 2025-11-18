@@ -35,11 +35,24 @@
     font-family: 'Sansita Swashed';
     font-weight: 600;
     font-size: 2.25rem;
+    max-width: 20rem;
 }
 
 /* Alterações footer */
 footer{
     background-image: url(../img/texturaCards.JPG );
+}
+
+.headerFooter, .contatos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 5rem;
+}
+
+.headerFooter{
+    border-bottom: 2px solid var(--principal);
 }
 
 .contatosTexto{
@@ -52,6 +65,7 @@ footer{
     font-family: 'Inter';
 }
 
+/*  */
 .item-card {
     transition: transform 0.2s ease;
 }
