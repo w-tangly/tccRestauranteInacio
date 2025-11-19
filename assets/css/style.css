@@ -41,6 +41,7 @@
 /* Alterações footer */
 footer{
     background-image: url(../img/texturaCards.JPG );
+    color: white;
 }
 
 .headerFooter, .contatos{
@@ -55,12 +56,14 @@ footer{
     border-bottom: 2px solid var(--principal);
 }
 
-.contatosTexto{
+.contatosTexto, .aboutUsTitulo{
     font-weight: 600;
     font-size: 1.5rem;
+    color: var(--principal);
+    font-family: 'Inter';
 }
 
-.contatosTexto, .links {
+.links {
     color: var(--principal);
     font-family: 'Inter';
 }

@@ -333,6 +333,7 @@ function carregarEstabelecimento() {
 
     // Footer
     document.getElementById('nomeFooter').textContent = nomeEstab;
+    document.getElementById('telefoneFooter').textContent = estabelecimento.telefone || '';
 
     // Mostrar status de funcionamento
     const statusFuncionamento = verificarHorarioFuncionamento();
