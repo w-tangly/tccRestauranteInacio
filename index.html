@@ -34,38 +34,6 @@
 
         <!-- Cardápio Principal -->
         <div id="cardapio" class="hidden min-h-screen bg-gray-50">
-            <!-- Header Principal -->
-            <header id="headerPrincipal" class="bg-black text-white shadow-lg p-6">
-                <h1 id="nomeEstabelecimento">Carregando...</h1>
-                <!-- <h1 id="nomeEstabelecimento" class="text-3xl font-bold mb-2">Carregando...</h1>
-                            <p id="descricaoEstabelecimento" class="text-orange-100"></p>
-                            <div class="flex items-center gap-2">
-                                <span>📞</span>
-                                <span id="telefoneEstabelecimento"></span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span>📍</span>
-                                <span id="enderecoEstabelecimento"></span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span>🕒</span>
-                                <span id="horarioEstabelecimento"></span>
-                            </div> -->
-            </header>
-
-            <p id="descricaoEstabelecimento"></p>
-            <div class="flex items-center gap-2">
-                <span>📞</span>
-                <span id="telefoneEstabelecimento"></span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span>📍</span>
-                <span id="enderecoEstabelecimento"></span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span>🕒</span>
-                <span id="horarioEstabelecimento"></span>
-            </div>
 
             <!-- Header Compacto Fixo (Mobile) -->
             <div id="headerCompacto"
@@ -83,6 +51,25 @@
                         🟢 Aberto
                     </div>
                 </div>
+            </div>
+
+            <div class="hero p-6">
+                <h1 id="nomeEstabelecimento">Carregando...</h1>
+                <h3 class="desc">Comida caseira</h3>
+                <p id="descricaoEstabelecimento"></p>
+                <div class="btns">
+                    <a href="#cardapio" class="btn">Cardápio</a>
+                    <a href="#sobreNos" class="btn">Saiba mais</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <span>📞</span>
+                <span id="telefoneEstabelecimento"></span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span>🕒</span>
+                <span id="horarioEstabelecimento"></span>
             </div>
 
             <!-- Carrinho Flutuante -->
@@ -408,8 +395,7 @@
                         <div class="itemFooter aboutUs">
                             <h3 class="aboutUsTitulo">Sobre nós</h3>
                             <p class="item" id="telefoneFooter"></p>
-                            <p class="item" id="enderecoFooter"></p>
-
+                            <p class="item" id="enderecoEstabelecimento"></p>
                         </div>
 
                         <div class="itemFooter devs">

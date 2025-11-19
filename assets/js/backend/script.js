@@ -334,7 +334,6 @@ function carregarEstabelecimento() {
     // Footer
     document.getElementById('nomeFooter').textContent = nomeEstab;
     document.getElementById('telefoneFooter').textContent = estabelecimento.telefone || '';
-    document.getElementById('enderecoFooter').textContent = estabelecimento.endereco || '';
 
     // Mostrar status de funcionamento
     const statusFuncionamento = verificarHorarioFuncionamento();

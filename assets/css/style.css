@@ -91,7 +91,7 @@ footer {
 .gridFooter {
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: center;
     justify-content: space-around;
     font-weight: 600;
     font-size: 1.25rem;
@@ -130,7 +130,16 @@ footer {
     .gridFooter {
         flex-direction: column;
         gap: 2rem;
+        justify-content: center;
     }
+}
+
+/* Estilização hero */
+.hero{
+    background-image: url('../img/carneBanner.jpg');
+    color: var(--brancoFalso);
+    min-height: 90vh;
+    background-size: cover;
 }
 
 /*  */
