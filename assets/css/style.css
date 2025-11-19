@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sansita+Swashed:wght@300..900&display=swap');
-:root{
+
+:root {
     --principal: #E9BD8C;
     --brancoFalso: #F5F5F5;
     --secundária: #933C24;
 }
 
 /* Alterações loading */
-#loading{
+#loading {
     background-image: url('../img/texturaCards.JPG');
 }
 
@@ -30,7 +31,8 @@
 }
 
 /* Alterações logo/nome do estabelecimento*/
-#nomeEstabelecimento, #nomeFooter{
+#nomeEstabelecimento,
+#nomeFooter {
     color: var(--principal);
     font-family: 'Sansita Swashed';
     font-weight: 600;
@@ -38,13 +40,29 @@
     max-width: 20rem;
 }
 
-/* Alterações footer */
-footer{
-    background-image: url(../img/texturaCards.JPG );
-    color: white;
+/* Responsividade logo/nome do estabelecimento */
+@media (max-width: 768px) {
+
+    #nomeEstabelecimento{
+        font-size: 1.75rem;
+        max-width: 10rem;
+    }
+
+    #nomeFooter{
+        font-size: 2rem;
+        max-width: 10rem;
+    }
 }
 
-.headerFooter, .contatos{
+/* Alterações footer */
+footer {
+    background-image: url(../img/texturaCards.JPG );
+    color: var(--brancoFalso);
+}
+
+.headerFooter,
+.contatos,
+.redes {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -52,11 +70,13 @@ footer{
     gap: 5rem;
 }
 
-.headerFooter{
+.headerFooter {
     border-bottom: 2px solid var(--principal);
 }
 
-.contatosTexto, .aboutUsTitulo{
+.contatosTexto,
+.aboutUsTitulo,
+.item.squad {
     font-weight: 600;
     font-size: 1.5rem;
     color: var(--principal);
@@ -66,6 +86,51 @@ footer{
 .links {
     color: var(--principal);
     font-family: 'Inter';
+}
+
+.gridFooter {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-around;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+/* responsividade footer */
+@media(max-width : 768px) {
+
+    footer{
+        text-align: center;
+    }
+
+    .headerFooter,
+    .contatos {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .headerFooter{
+        gap: 3rem;
+    }
+
+    .contatos{
+        gap: 1rem;
+    }
+
+    .headerFooter {
+        border-bottom: none;
+    }
+
+    .links {
+        color: var(--principal);
+        font-family: 'Inter';
+    }
+
+    .gridFooter {
+        flex-direction: column;
+        gap: 2rem;
+    }
 }
 
 /*  */
