@@ -54,19 +54,26 @@
             </div>
 
             <div class="hero p-6">
-                <h1 id="nomeEstabelecimento">Carregando...</h1>
-                <h3 class="desc">Comida caseira</h3>
-                <p id="descricaoEstabelecimento"></p>
+                <div class="header">
+                    <h1 id="nomeEstabelecimento">Carregando...</h1>
+                    <nav class="nav p-6">
+                        <a href="#" class="navItem cardapioNav">Cardápio</a>
+                        <a href="#sobreNos" class="navItem">Sobre nós</a>
+                        <a href="#contatos" class="navItem">Contatos</a>
+                    </nav>
+                </div>
+
+                <div class="herotxt">
+                    <p class="desc">Comida caseira</h3>
+                    <h2 id="descricaoEstabelecimento"></p>
+                </div>
+               
                 <div class="btns">
                     <a href="#cardapio" class="btn">Cardápio</a>
-                    <a href="#sobreNos" class="btn">Saiba mais</a>
+                    <a href="#sobreNos" class="btn">Sobre nós →</a>
                 </div>
             </div>
 
-            <div class="flex items-center gap-2">
-                <span>📞</span>
-                <span id="telefoneEstabelecimento"></span>
-            </div>
             <div class="flex items-center gap-2">
                 <span>🕒</span>
                 <span id="horarioEstabelecimento"></span>
@@ -364,7 +371,7 @@
                 <footer class="p-6">
                     <div class="headerFooter p-6">
                         <h1 id="nomeFooter">Carregando...</h1>
-                        <div class="contatos">
+                        <div id="contatos">
                             <h2 class="contatosTexto">Nossos contatos</h2>
                             <div class="redes">
                                 <a href="https://www.instagram.com/restauranteinacio/" target="_blank" class="links">
@@ -392,9 +399,9 @@
                         </div>
                     </div>
                     <div class="gridFooter p-6">
-                        <div class="itemFooter aboutUs">
-                            <h3 class="aboutUsTitulo">Sobre nós</h3>
-                            <p class="item" id="telefoneFooter"></p>
+                        <div class="itemFooter info">
+                            <h3 class="infoTitulo">Informações</h3>
+                            <p class="item" id="telefoneEstabelecimento"></p>
                             <p class="item" id="enderecoEstabelecimento"></p>
                         </div>
 

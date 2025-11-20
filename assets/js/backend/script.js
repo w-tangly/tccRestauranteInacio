@@ -20,7 +20,6 @@ let categoriasComItens = [];
 let categoriaAtiva = 1;
 let carregando = true;
 let carrinho = [];
-let numeroMesa = null;
 let tipoPedidoAtual = 'entrega';
 let formaPagamentoAtual = null;
 
@@ -333,7 +332,6 @@ function carregarEstabelecimento() {
 
     // Footer
     document.getElementById('nomeFooter').textContent = nomeEstab;
-    document.getElementById('telefoneFooter').textContent = estabelecimento.telefone || '';
 
     // Mostrar status de funcionamento
     const statusFuncionamento = verificarHorarioFuncionamento();
@@ -1225,69 +1223,8 @@ function esconderBarraEndereco() {
     }
 }
 
-// Função para obter número da mesa da URL
-function obterNumeroMesa() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const mesa = urlParams.get('mesa');
-
-    if (mesa && !isNaN(mesa) && parseInt(mesa) > 0) {
-        numeroMesa = parseInt(mesa);
-        return numeroMesa;
-    }
-
-    // Verificar se tem mesa no final da URL (formato: /mesa/5)
-    const pathname = window.location.pathname;
-    const mesaMatch = pathname.match(/\/mesa\/(\d+)$/);
-    if (mesaMatch) {
-        numeroMesa = parseInt(mesaMatch[1]);
-        return numeroMesa;
-    }
-
-    // Verificar se tem mesa no hash (formato: #mesa5)
-    const hash = window.location.hash;
-    const hashMatch = hash.match(/#mesa(\d+)$/);
-    if (hashMatch) {
-        numeroMesa = parseInt(hashMatch[1]);
-        return numeroMesa;
-    }
-
-    return null;
-}
-
-// Função para mostrar informação da mesa no header
-function mostrarInfoMesa() {
-    if (!numeroMesa) return;
-
-    // Criar elemento de informação da mesa
-    const infoMesa = document.createElement('div');
-    infoMesa.className = 'bg-blue-500 text-white text-center py-2 px-4';
-    infoMesa.innerHTML = `
-                <div class="flex items-center justify-center gap-2">
-                    <span class="text-lg">🪑</span>
-                    <span class="font-bold">Mesa ${numeroMesa}</span>
-                </div>
-            `;
-
-    // Inserir após o header principal
-    const headerPrincipal = document.getElementById('headerPrincipal');
-    headerPrincipal.parentNode.insertBefore(infoMesa, headerPrincipal.nextSibling);
-
-    // Adicionar também no header compacto
-    const statusCompacto = document.getElementById('statusCompacto');
-    const infoMesaCompacta = document.createElement('div');
-    infoMesaCompacta.className = 'text-xs font-medium bg-blue-500 text-white px-2 py-1 rounded-full ml-2';
-    infoMesaCompacta.innerHTML = `🪑 Mesa ${numeroMesa}`;
-    statusCompacto.parentNode.insertBefore(infoMesaCompacta, statusCompacto.nextSibling);
-}
-
 // Inicializar aplicação
-obterNumeroMesa();
 carregarDados();
-
-// Mostrar info da mesa após carregar
-setTimeout(() => {
-    mostrarInfoMesa();
-}, 500);
 
 // Iniciar verificação de horário
 iniciarVerificacaoHorario();
