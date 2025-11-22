@@ -9,10 +9,6 @@ let estabelecimento = {
     descricao: "",
     telefone: "",
     endereco: "",
-    horario: "",
-    horario_abertura: "",
-    horario_fechamento: "",
-    dias_funcionamento: "",
 };
 let categorias = [];
 let itens = [];
@@ -262,61 +258,6 @@ function mostrarErroDetalhado(mensagem) {
             `;
 }
 
-// Função para verificar se o estabelecimento está aberto
-function verificarHorarioFuncionamento() {
-    const agora = new Date();
-    const diaAtual = agora.getDay(); // 0 = Domingo, 1 = Segunda, etc.
-    const horaAtual = agora.getHours();
-    const minutoAtual = agora.getMinutes();
-    const tempoAtual = horaAtual * 60 + minutoAtual; // Converter para minutos
-
-    // Se não tiver horários específicos configurados, considerar sempre aberto
-    if (!estabelecimento.horario_abertura || !estabelecimento.horario_fechamento) {
-        return { aberto: true, motivo: '' };
-    }
-
-    // Verificar dias de funcionamento (se especificado)
-    if (estabelecimento.dias_funcionamento && estabelecimento.dias_funcionamento.trim() !== '') {
-        const diasPermitidos = estabelecimento.dias_funcionamento.toLowerCase().split(',').map(d => d.trim());
-        const diasSemana = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
-        const diaHoje = diasSemana[diaAtual];
-
-        if (!diasPermitidos.includes(diaHoje) && !diasPermitidos.includes('todos')) {
-            return {
-                aberto: false,
-                motivo: `Funcionamos apenas: ${estabelecimento.dias_funcionamento}`
-            };
-        }
-    }
-
-    // Converter horários de abertura e fechamento para minutos
-    const [horaAbertura, minutoAbertura] = estabelecimento.horario_abertura.split(':').map(Number);
-    const [horaFechamento, minutoFechamento] = estabelecimento.horario_fechamento.split(':').map(Number);
-
-    const tempoAbertura = horaAbertura * 60 + minutoAbertura;
-    const tempoFechamento = horaFechamento * 60 + minutoFechamento;
-
-    // Verificar se está dentro do horário
-    let estaAberto = false;
-
-    if (tempoFechamento > tempoAbertura) {
-        // Horário normal (ex: 09:00 às 18:00)
-        estaAberto = tempoAtual >= tempoAbertura && tempoAtual <= tempoFechamento;
-    } else {
-        // Horário que cruza meia-noite (ex: 18:00 às 02:00)
-        estaAberto = tempoAtual >= tempoAbertura || tempoAtual <= tempoFechamento;
-    }
-
-    if (!estaAberto) {
-        return {
-            aberto: false,
-            motivo: `Horário de funcionamento: ${estabelecimento.horario_abertura} às ${estabelecimento.horario_fechamento}`
-        };
-    }
-
-    return { aberto: true, motivo: '' };
-}
-
 // Função para carregar dados do estabelecimento na interface
 function carregarEstabelecimento() {
     const nomeEstab = estabelecimento.nome || 'Nome não informado';
@@ -332,21 +273,6 @@ function carregarEstabelecimento() {
 
     // Footer
     document.getElementById('nomeFooter').textContent = nomeEstab;
-
-    // Mostrar status de funcionamento
-    const statusFuncionamento = verificarHorarioFuncionamento();
-    const horarioTexto = estabelecimento.horario || '';
-    const statusTexto = statusFuncionamento.aberto ? '🟢 Aberto' : '🔴 Fechado';
-    const statusTextoCompacto = statusFuncionamento.aberto ? '🟢 Aberto' : '🔴 Fechado';
-
-    document.getElementById('horarioEstabelecimento').innerHTML = `${horarioTexto} ${statusTexto}`;
-    document.getElementById('statusCompacto').textContent = statusTextoCompacto;
-
-    // Atualizar carrinho e botões se estiver fechado
-    if (!statusFuncionamento.aberto) {
-        mostrarAvisoFechado(statusFuncionamento.motivo);
-    }
-
 }
 
 // Função para formatar preço
@@ -572,13 +498,6 @@ function habilitarBotoesAdicionar() {
 
 // Funções do carrinho
 function adicionarAoCarrinhoComVerificacao(id, nome, preco) {
-    const statusFuncionamento = verificarHorarioFuncionamento();
-
-    if (!statusFuncionamento.aberto) {
-        mostrarFeedback(`❌ ${statusFuncionamento.motivo}`, 'error');
-        return;
-    }
-
     adicionarAoCarrinho(id, nome, preco);
 }
 
@@ -753,20 +672,7 @@ function enviarPedidoSimples() {
         return;
     }
 
-    // Verificar horário de funcionamento antes de enviar
-    const statusFuncionamento = verificarHorarioFuncionamento();
-    if (!statusFuncionamento.aberto) {
-        mostrarFeedback(`❌ Não é possível enviar pedidos. ${statusFuncionamento.motivo}`, 'error');
-        return;
-    }
-
     const telefone = estabelecimento.telefone.replace(/\D/g, '');
-
-    // Iniciar mensagem com informação da mesa (se disponível)
-    let mensagem = `Olá! Gostaria de fazer o seguinte pedido:\n\n`;
-    if (numeroMesa) {
-        mensagem = `🪑 *MESA ${numeroMesa}*\n\nOlá! Gostaria de fazer o seguinte pedido:\n\n`;
-    }
 
     let total = 0;
     carrinho.forEach(item => {
@@ -778,10 +684,6 @@ function enviarPedidoSimples() {
 
     mensagem += `💰 TOTAL: ${formatarPreco(total)}\n\n`;
 
-    // Adicionar mesa no final também se disponível
-    if (numeroMesa) {
-        mensagem += `📍 Mesa: ${numeroMesa}\n\n`;
-    }
 
     mensagem += `Obrigado!`;
 
@@ -822,20 +724,6 @@ function mostrarFeedback(mensagem, tipo = 'success') {
     }, duracao);
 }
 
-// Função para verificar horário periodicamente
-function iniciarVerificacaoHorario() {
-    // Verificar a cada minuto
-    setInterval(() => {
-        const statusAnterior = verificarHorarioFuncionamento();
-        carregarEstabelecimento();
-
-        // Se mudou o status, recarregar a página
-        const statusAtual = verificarHorarioFuncionamento();
-        if (statusAnterior.aberto !== statusAtual.aberto) {
-            location.reload();
-        }
-    }, 60000); // 60 segundos
-}
 
 // FUNÇÃO PARA MOSTRAR ERRO DE IMAGEM
 function mostrarErroImagem(imgElement) {
@@ -847,8 +735,6 @@ function mostrarErroImagem(imgElement) {
                 </div>
             `;
 }
-
-
 
 // Funções do modal de entrega
 function abrirModalEntrega() {
@@ -862,11 +748,6 @@ function abrirModalEntrega() {
 
     // Atualizar resumo do pedido
     atualizarResumoPedidoEntrega();
-
-    // Se for mesa, definir como retirada por padrão
-    if (numeroMesa) {
-        selecionarTipoPedido('retirada');
-    }
 }
 
 function fecharModalEntrega() {
@@ -1014,13 +895,6 @@ function enviarPedidoEntrega() {
         return;
     }
 
-    // Verificar horário de funcionamento
-    const statusFuncionamento = verificarHorarioFuncionamento();
-    if (!statusFuncionamento.aberto) {
-        mostrarFeedback(`❌ Não é possível enviar pedidos. ${statusFuncionamento.motivo}`, 'error');
-        return;
-    }
-
     // Coletar dados do formulário
     const nome = document.getElementById('nomeCliente').value.trim();
     const telefone = document.getElementById('telefoneCliente').value.trim();
@@ -1061,19 +935,6 @@ function enviarPedidoEntrega() {
     // Montar mensagem do WhatsApp
     const telefoneEstab = estabelecimento.telefone.replace(/\D/g, '');
     let mensagem = '';
-
-    // Cabeçalho
-    if (tipoPedidoAtual === 'entrega') {
-        mensagem = `🚚 *PEDIDO PARA ENTREGA*\n\n`;
-        if (numeroMesa) {
-            mensagem += `🪑 Mesa ${numeroMesa} solicitou entrega\n\n`;
-        }
-    } else {
-        mensagem = `🏪 *PEDIDO PARA RETIRADA*\n\n`;
-        if (numeroMesa) {
-            mensagem += `🪑 Mesa ${numeroMesa}\n\n`;
-        }
-    }
 
     // Dados do cliente
     mensagem += `👤 *Cliente:* ${nome}\n`;
@@ -1225,9 +1086,6 @@ function esconderBarraEndereco() {
 
 // Inicializar aplicação
 carregarDados();
-
-// Iniciar verificação de horário
-iniciarVerificacaoHorario();
 
 // Iniciar controle do header mobile
 iniciarControleMobileHeader();

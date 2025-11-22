@@ -191,7 +191,7 @@ footer {
 }
 
 .cardapioNav:hover{
-    color: var(--brancoFalso);
+    color: var(--secundária);
 }
 
 #descricaoEstabelecimento{
@@ -206,6 +206,42 @@ footer {
     color: var(--principal);
     font-size: 1.5rem;
     font-weight: 600;
+}
+
+.btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 25vw;  
+    font-weight: 600;
+    font-size: 1.5rem;
+    gap: 5rem;
+}
+
+.btnCardapio{
+    color: var(--brancoFalso);
+    border-radius: .5rem;
+    background-color: var(--secundária);
+    padding: 1.25rem 2.25rem;
+}
+
+.btnCardapio:hover{
+    color: var(--secundária);
+    background-color: var(--brancoFalso);
+}
+
+.btnSobreNos{
+    color: var(--principal);
+}
+
+.btnSobreNos:hover{
+    color: var(--secundária);
+}
+
+/* responsividade hero */
+@media(max-width: 784px){
+    
 }
 
 /*  */
