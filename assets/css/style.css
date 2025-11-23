@@ -1,81 +1,82 @@
+/* Importação de Fontes: Consolida todas as fontes necessárias em uma única requisição. */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sansita+Swashed:wght@300..900&display=swap');
-/* Fontes usadas:
-Inter
-Poppins
-Sansita Swashed */
 
+/* --- */
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter';
+/* Reset Global Básico: Define regras de reinicialização para todos os elementos. */
+* {
+    margin: 0; /* Remove margem padrão */
+    padding: 0; /* Remove preenchimento padrão */
+    /* Garante que padding e border não aumentem o tamanho final do elemento */
+    box-sizing: border-box; 
+    /* Define 'Inter' como a fonte padrão para todo o documento */
+    font-family: 'Inter', sans-serif; 
 }
 
+/* Variáveis CSS (Custom Properties): Armazena cores para fácil manutenção. */
 :root {
-    --principal: #E9BD8C;
-    --brancoFalso: #F5F5F5;
-    --secundária: #933C24;
+    --principal: #E9BD8C; /* Cor Principal (e.g., Dourado/Bege) */
+    --brancoFalso: #F5F5F5; /* Cor de fundo claro (e.g., Quase Branco) */
+    --secundaria: #933C24; /* Cor Secundária (e.g., Marrom/Bordô) */
 }
 
-/* Alterações loading */
+/* --- */
+
+/* Loading/Spinner: Estilização da tela de carregamento e do componente spinner. */
 #loading {
+    /* Define uma imagem de fundo (texturaCards.JPG) para a tela de loading */
     background-image: url('../img/texturaCards.JPG');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; /* Garante que a imagem cubra toda a área */
 }
 
 .loading-spinner {
-    border: .5rem solid #f3f3f3;
-    border-top: .5rem solid var(--principal);
+    border: .5rem solid #f3f3f3; /* Borda externa clara */
+    border-top: .5rem solid var(--principal); /* Borda superior com a cor principal (o efeito giratório) */
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite; /* Animação de rotação */
 }
 
+/* Keyframes da Animação 'spin' */
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-/* Alterações logo/nome do estabelecimento*/
+/* --- */
+
+/* Logo/Nome do Estabelecimento: Estilos para o nome principal e no footer. */
 #nomeEstabelecimento,
 #nomeFooter {
     color: var(--principal);
-    font-family: 'Sansita Swashed';
+    font-family: 'Sansita Swashed', cursive;
     font-weight: 600;
     font-size: 2.25rem;
     max-width: 20rem;
 }
 
-/* Responsividade logo/nome do estabelecimento */
+/* Responsividade do Logo: Ajuste do tamanho para telas menores (max-width: 768px). */
 @media (max-width: 768px) {
-
-    #nomeEstabelecimento{
-        font-size: 1.75rem;
-        max-width: 10rem;
-    }
-
-    #nomeFooter{
+    #nomeFooter, #nomeEstabelecimento {
         font-size: 2rem;
         max-width: 10rem;
     }
 }
 
-/* Alterações footer */
+/* --- */
+
+/* Footer: Estilização do rodapé. */
 footer {
-    background-image: url(../img/texturaCards.JPG );
+    /* Imagem de fundo e configurações */
+    background-image: url(../img/texturaCards.JPG);
     color: var(--brancoFalso);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+/* Elementos Flex Container no Footer: Aplica as configurações Flexbox comuns. */
 .headerFooter,
 #contatos,
 .redes {
@@ -86,24 +87,28 @@ footer {
     gap: 5rem;
 }
 
+/* Divisor do Header Footer: Define uma borda inferior. */
 .headerFooter {
     border-bottom: 2px solid var(--principal);
 }
 
+/* Títulos e Textos de Destaque no Footer: Estilos para textos importantes. */
 .contatosTexto,
 .infoTitulo,
 .item.squad {
     font-weight: 600;
     font-size: 1.5rem;
     color: var(--principal);
-    font-family: 'Inter';
+    /* `font-family: 'Inter';` removido, pois já é o padrão herdado. */
 }
 
+/* Links no Footer: Estilos básicos para os links. */
 .links {
     color: var(--principal);
-    font-family: 'Inter';
+    /* `font-family: 'Inter';` removido, pois já é o padrão herdado. */
 }
 
+/* Grid/Layout Principal do Footer (Desktop): Configuração Flexbox para o conteúdo principal. */
 .gridFooter {
     display: flex;
     flex-direction: row;
@@ -113,35 +118,29 @@ footer {
     font-size: 1.25rem;
 }
 
-/* responsividade footer */
+/* Responsividade do Footer: Ajustes para telas menores (max-width: 768px). */
 @media(max-width : 768px) {
-
-    footer{
+    footer {
         text-align: center;
     }
 
+    /* Altera a direção principal e de contatos para coluna (empilhamento vertical). */
     .headerFooter,
     #contatos {
         flex-direction: column;
         justify-content: center;
     }
 
-    .headerFooter{
+    .headerFooter {
         gap: 3rem;
+        border-bottom: none; /* Remove a borda no mobile, se for o design pretendido. */
     }
 
-    #contatos{
+    #contatos {
         gap: 1rem;
     }
 
-    .headerFooter {
-        border-bottom: none;
-    }
-
-    .links {
-        color: var(--principal);
-        font-family: 'Inter';
-    }
+    /* Regra `.links` redundante removida. */
 
     .gridFooter {
         flex-direction: column;
@@ -150,8 +149,10 @@ footer {
     }
 }
 
-/* Estilização header/hero */
-.hero{
+/* --- */
+
+/* Hero/Header Principal: Estilização da seção de destaque no topo da página. */
+.hero {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -162,119 +163,169 @@ footer {
     background-repeat: no-repeat;
 }
 
-.header{
+/* Header (Topo): Contêiner do logo e navegação. */
+.header {
     display: flex;
     flex-direction: row;
     align-items: start;
 }
 
-.nav{
+/* Navegação Principal (Nav): Estilos do menu. */
+.nav {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     gap: 5rem;
 }
 
-.navItem{
-    font-family: 'Poppins';
+/* Itens de Navegação */
+.navItem {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.5rem;
     color: var(--brancoFalso);
     font-weight: 600;
 }
 
-.navItem:hover{
+/* Efeito de hover nos itens da nav */
+.navItem:hover {
     color: var(--principal);
 }
 
-.cardapioNav{
+/* Destaque para o link do cardápio */
+.cardapioNav {
     color: var(--principal);
 }
 
-.cardapioNav:hover{
-    color: var(--secundária);
+/* Efeito de hover no link do cardápio */
+.cardapioNav:hover {
+    color: var(--secundaria);
 }
 
-#descricaoEstabelecimento{
-    font-family: 'Sansita Swashed';
+/* Descrição Principal do Estabelecimento */
+#descricaoEstabelecimento {
+    font-family: 'Sansita Swashed', cursive;
     font-size: 4rem;
     color: var(--brancoFalso);
     max-width: 30rem;
     font-weight: 400;
 }
 
-.desc{
+/* Descrição Secundária */
+.desc {
     color: var(--principal);
     font-size: 1.5rem;
     font-weight: 600;
 }
 
-.btns{
+/* Botões de Ação (CTAs) */
+.btns {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    max-width: 25vw;  
+    max-width: 25vw;
     font-weight: 600;
     font-size: 1.5rem;
     gap: 5rem;
 }
 
-.btnCardapio{
+/* Botão Principal (Cardápio) */
+.btnCardapio {
     color: var(--brancoFalso);
     border-radius: .5rem;
-    background-color: var(--secundária);
+    background-color: var(--secundaria);
     padding: 1.25rem 2.25rem;
 }
 
-.btnCardapio:hover{
-    color: var(--secundária);
+.btnCardapio:hover {
+    color: var(--secundaria);
     background-color: var(--brancoFalso);
 }
 
-.btnSobreNos{
+/* Botão Secundário (Sobre Nós) */
+.btnSobreNos {
     color: var(--principal);
 }
 
-.btnSobreNos:hover{
-    color: var(--secundária);
+.btnSobreNos:hover {
+    color: var(--secundaria);
 }
 
-/* responsividade hero */
-@media(max-width: 784px){
-    
+/* Responsividade do Hero: Ajustes para telas menores (max-width: 768px). */
+@media(max-width: 768px) {
+    /* Esconde a navegação principal (provavelmente substituída por um menu hambúrguer via JS) */
+    .nav {
+        display: none;
+    }
+
+    /* Regras de hover e cor da navegação redundantes removidas. */
+
+    #descricaoEstabelecimento {
+        font-size: 3rem;
+        max-width: 25rem;
+    }
+
+    .btns {
+        /* Permite que o contêiner de botões ocupe a largura total */
+        max-width: 100vw;
+        gap: 0; /* Remove o gap no mobile, para botões ficarem lado a lado/alinhados */
+    }
+
+    .btnCardapio {
+        padding: 1rem 2rem;
+    }
 }
 
-/*  */
+/* --- */
+
+/* Estilizações do Cardápio */
+#cardapioTitulo{
+    font-family: 'Sansita Swashed', cursive;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 600;
+}
+
+/* Item do Card: Efeito de transição suave em hover. */
 .item-card {
     transition: transform 0.2s ease;
 }
 
 .item-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Efeito sutil de elevação */
 }
 
+/* Botão de Pedido: Define transição para animações. */
 .btn-pedido {
     transition: all 0.3s ease;
 }
 
+/* Botão de Categoria Ativa: Estilo de destaque para a categoria selecionada. */
 .categoria-btn.ativa {
+    /* Gradiente vibrante para destaque */
     background: linear-gradient(135deg, #FFFF00 0%, #403233 100%);
     color: white;
+    /* Sombra para o efeito de "elevação" */
     box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
-/* Header fixo compacto para mobile */
+/* --- */
+
+/* Header Fixo Compacto (Mobile): Usado para barra de navegação que aparece ao rolar. */
 .header-compacto {
+    /* Inicialmente fora da tela */
     transform: translateY(-100%);
     transition: transform 0.3s ease;
 }
 
 .header-compacto.visivel {
+    /* Move para a posição visível */
     transform: translateY(0);
 }
 
-/* Força altura mínima da viewport para esconder barra de endereço */
+/* Otimização de Altura da Viewport (Mobile): Correção para a barra de endereço do navegador. */
 @media (max-width: 768px) {
+    /* Otimização para garantir que 100vh funcione corretamente em navegadores móveis (iOS/Chrome) */
     html {
         height: 100vh;
         height: -webkit-fill-available;
@@ -286,7 +337,9 @@ footer {
     }
 }
 
-/* Estilos do carrinho modal */
+/* --- */
+
+/* Estilos do Carrinho Modal: Componentes e Animações. */
 .carrinho-flutuante {
     transition: all 0.3s ease;
     animation: bounceIn 0.5s ease;
@@ -297,14 +350,17 @@ footer {
 }
 
 .modal-overlay {
+    /* Efeito de desfoque no fundo do modal */
     backdrop-filter: blur(4px);
     transition: all 0.3s ease;
 }
 
 .modal-content {
+    /* Animação de entrada do modal */
     animation: slideUpModal 0.3s ease;
 }
 
+/* Keyframes da Animação 'bounceIn' (para o ícone flutuante) */
 @keyframes bounceIn {
     0% {
         transform: scale(0) rotate(180deg);
@@ -322,6 +378,7 @@ footer {
     }
 }
 
+/* Keyframes da Animação 'slideUpModal' (para o conteúdo do modal) */
 @keyframes slideUpModal {
     0% {
         transform: translateY(100%);
@@ -334,18 +391,13 @@ footer {
     }
 }
 
+/* Animação para feedback de item adicionado */
 .item-adicionado {
     animation: pulseAdd 0.6s ease;
 }
 
+/* Keyframes da Animação 'pulseAdd' */
 @keyframes pulseAdd {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }

@@ -296,7 +296,7 @@ function renderizarCategorias() {
                 ? 'ativa'
                 : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
             }`;
-        botao.textContent = `${categoria.icone} ${categoria.nome}`;
+        botao.textContent = `${categoria.nome}`;
         botao.onclick = () => {
             categoriaAtiva = parseInt(categoria.id);
             renderizarCategorias();
@@ -314,7 +314,7 @@ function renderizarItens() {
 
     if (!categoriaAtual || !tituloCategoria || !listaItens) return;
 
-    tituloCategoria.innerHTML = `${categoriaAtual.icone} ${categoriaAtual.nome}`;
+    tituloCategoria.innerHTML = `${categoriaAtual.nome}`;
     listaItens.innerHTML = '';
 
     if (!categoriaAtual.itens || categoriaAtual.itens.length === 0) {
@@ -425,7 +425,7 @@ function renderizarItens() {
                                     ${!itemDisponivel ? 'disabled' : ''}
                                     onclick="${itemDisponivel ? `adicionarAoCarrinhoComVerificacao('${item.id}', '${item.nome.replace(/'/g, "\\'")}', ${preco})` : ''}"
                                 >
-                                    ${itemDisponivel ? '🛒 Adicionar' : 'Indisponível'}
+                                    ${itemDisponivel ? ' Adicionar' : 'Indisponível'}
                                 </button>
                             </div>
                         </div>
@@ -434,37 +434,6 @@ function renderizarItens() {
 
         listaItens.appendChild(itemDiv);
     });
-}
-
-// Função para mostrar aviso de estabelecimento fechado
-function mostrarAvisoFechado(motivo) {
-    // Verificar se já existe aviso
-    let avisoExistente = document.getElementById('avisoFechado');
-    if (avisoExistente) {
-        avisoExistente.remove();
-    }
-
-    // Criar novo aviso
-    const aviso = document.createElement('div');
-    aviso.id = 'avisoFechado';
-    aviso.className = 'bg-red-50 border border-red-200 rounded-lg p-4 mb-6';
-    aviso.innerHTML = `
-                <div class="flex items-center gap-3">
-                    <div class="text-2xl">🔴</div>
-                    <div>
-                        <h3 class="font-bold text-red-800 mb-1">Estabelecimento Fechado</h3>
-                        <p class="text-red-700 text-sm">${motivo}</p>
-                        <p class="text-red-600 text-xs mt-1">Não é possível fazer pedidos no momento</p>
-                    </div>
-                </div>
-            `;
-
-    // Inserir após o header
-    const main = document.querySelector('main .max-w-4xl');
-    main.insertBefore(aviso, main.firstChild);
-
-    // Desabilitar todos os botões de adicionar
-    desabilitarBotoesAdicionar();
 }
 
 // Função para desabilitar botões de adicionar ao carrinho
@@ -491,7 +460,7 @@ function habilitarBotoesAdicionar() {
             botao.disabled = false;
             botao.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
             botao.classList.add('bg-orange-500', 'text-white', 'hover:bg-orange-600');
-            botao.textContent = '🛒 Adicionar';
+            botao.textContent = ' Adicionar';
         }
     });
 }
@@ -946,7 +915,7 @@ function enviarPedidoEntrega() {
     }
 
     // Itens do pedido
-    mensagem += `🛒 *ITENS DO PEDIDO:*\n\n`;
+    mensagem += ` *ITENS DO PEDIDO:*\n\n`;
     let total = 0;
     carrinho.forEach(item => {
         const subtotal = item.preco * item.quantidade;
