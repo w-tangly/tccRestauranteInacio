@@ -292,7 +292,7 @@ function renderizarCategorias() {
 
     categorias.forEach(categoria => {
         const botao = document.createElement('button');
-        botao.className = `categoria-btn px-4 py-2 rounded-full font-medium whitespace-nowrap transition-all ${categoria.id == categoriaAtiva
+        botao.className = `categoria-btn m-0.5 px-2 py-2 md:px-4 md:py-2 rounded-full text-sm font-medium whitespace-nowrap md:text-base lg:text-xl transition-all ${categoria.id == categoriaAtiva
                 ? 'ativa'
                 : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
             }`;
@@ -365,11 +365,11 @@ function renderizarItens() {
                 ).join(' ');
 
                 htmlImagem = `
-                        <div class="md:w-1/3">
+                        <div class="md:w-2/3">
                             <img
                                 src="${imagemConfig.formatos[0]}"
                                 alt="${item.nome}"
-                                class="w-full h-48 md:h-48 object-contain bg-gray-50 rounded-lg"
+                                class="w-64 h-64 md:h-48 md:w-48 lg:h-64 lg:w-64 object-cover bg-gray-50 rounded-lg mt-4"
                                 onload=""
                                 onerror="${fallbackUrls}"
                                 loading="lazy"
@@ -378,11 +378,11 @@ function renderizarItens() {
             } else {
                 // URL simples (Dropbox, URLs externas)
                 htmlImagem = `
-                        <div class="md:w-1/3">
+                        <div class="md:w-2/3">
                             <img
                                 src="${imagemConfig.url}"
                                 alt="${item.nome}"
-                                class="w-full h-48 md:h-48 object-contain bg-gray-50"
+                                class="w-32 h-32 md:h-48 md:w-48 object-contain bg-gray-50"
                                 onload=""
                                 onerror="mostrarErroImagem(this);"
                                 loading="lazy"
@@ -391,7 +391,7 @@ function renderizarItens() {
             }
         } else {
             htmlImagem = `
-                    <div class="md:w-1/3 bg-gray-100 flex items-center justify-center rounded-lg">
+                    <div class="md:w-1/2 bg-gray-100 flex items-center justify-center rounded-lg">
                         <div class="text-center p-4">
                             <div class="text-4xl mb-2">🍽️</div>
                             <p class="text-gray-500 text-sm">Sem imagem</p>
@@ -400,9 +400,9 @@ function renderizarItens() {
         }
 
         itemDiv.innerHTML = `
-                    <div class="flex flex-col md:flex-row">
+                    <div class="max-w-3/4 flex flex-col items-center justify-center">
                         ${htmlImagem}
-                        <div class="${imagemConfig ? 'flex-1' : 'w-full'} p-4">
+                        <div class="${imagemConfig ? 'flex-1' : 'w-full'} w-full p-4">
                             <div class="flex justify-between items-start mb-2">
                                 <h3 class="text-lg font-semibold text-gray-800">${item.nome}</h3>
                                 ${!itemDisponivel ? `
@@ -412,14 +412,14 @@ function renderizarItens() {
                                 ` : ''}
                             </div>
                             <p class="text-gray-600 text-sm mb-3">${item.descricao}</p>
-                            <div class="flex justify-between items-center">
+                            <div class="flex justify-between items-center ">
                                 <span class="text-2xl font-bold text-yellow-600">
                                     ${precoFormatado}
                                 </span>
                                 <button
                                     id="btn-${item.id}"
                                     class="btn-pedido px-4 py-2 rounded-lg font-medium transition-all ${itemDisponivel
-                ? 'bg-yellow-500 text-white hover:bg-orange-600'
+                ?  'text-white hover:bg-orange-700'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }"
                                     ${!itemDisponivel ? 'disabled' : ''}

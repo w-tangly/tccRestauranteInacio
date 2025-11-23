@@ -161,6 +161,7 @@ footer {
     min-height: 80vh;
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: 50% 50%;
 }
 
 /* Header (Topo): Contêiner do logo e navegação. */
@@ -251,6 +252,9 @@ footer {
     color: var(--secundaria);
 }
 
+.btn-pedido{
+    background-color: var(--secundaria);
+}
 /* Responsividade do Hero: Ajustes para telas menores (max-width: 768px). */
 @media(max-width: 768px) {
     /* Esconde a navegação principal (provavelmente substituída por um menu hambúrguer via JS) */
@@ -302,11 +306,9 @@ footer {
 
 /* Botão de Categoria Ativa: Estilo de destaque para a categoria selecionada. */
 .categoria-btn.ativa {
-    /* Gradiente vibrante para destaque */
-    background: linear-gradient(135deg, #FFFF00 0%, #403233 100%);
+    /* Fundo que combine com a paleta de cor */
+    background: #933C24;
     color: white;
-    /* Sombra para o efeito de "elevação" */
-    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
 /* --- */
@@ -317,7 +319,7 @@ footer {
     transform: translateY(-100%);
     transition: transform 0.3s ease;
 }
-
+ 
 .header-compacto.visivel {
     /* Move para a posição visível */
     transform: translateY(0);
